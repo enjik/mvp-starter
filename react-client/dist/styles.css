@@ -54,6 +54,7 @@ form {
    display: inline-block;
    padding: .5rem 0.8rem;
    margin-top: 1.618rem;
+   margin-bottom: 1.618rem;
    font-weight: 400;
    text-align: center;
    text-transform: uppercase;
@@ -109,7 +110,7 @@ form {
 }
 #right-panel {
   margin-top: 40px;
-  border: 4px solid rgb(131, 228, 200);
+  border: 7px solid rgb(131, 228, 200);
   height: 700px;
   width: 150px;
   border-radius: 5px;
@@ -136,15 +137,15 @@ form {
   height: 100vh;
 }
 #completion-bar {
-  align-text: center;
   justify-content: center;
-  margin: 10px;
+  margin: 5px;
   border-radius: 5px;
   font-size: 1.3em;
   z-index: -2;
 }
 #completion-text {
-  margin-left: 10px;
+  font-size: 1.3em;
+  align-self: center
 }
 circle {
   position: relative;

@@ -84,8 +84,8 @@ class App extends React.Component {
           deadline: new Date(2018, 7, 28, 7, 30),
           category: 'toy problems',
           completed: false,
-          x: 20,
-          y: 34
+          x: 300,
+          y: 40
         },
         {
           id: 8,
@@ -95,8 +95,8 @@ class App extends React.Component {
           deadline: new Date(2018, 7, 28, 7, 30),
           category: 'toy problems',
           completed: false,
-          x: 182,
-          y: 389
+          x: 600,
+          y: 300
         }
       ],
 
@@ -146,7 +146,7 @@ class App extends React.Component {
   render () {
     return (
       <div id="full-page">
-        {this.state.showPopup ? <Popup text="New Task" closePopup={this.handleSubmit} /> :null}
+        {this.state.showPopup ? <Popup text="Task Details" closePopup={this.handleSubmit} /> :null}
         <div id="left-panel">
           <div id="header-div">
             <h1 id="header">Bubbl.it</h1>
@@ -160,8 +160,8 @@ class App extends React.Component {
         </div>
 
         <div id="right-panel">
-            <div>
-              <CompletionBar id="completion-bar"/>
+            <div id="completion-bar">
+              <CompletionBar />
             </div>
         </div>
       </div>
