@@ -19,6 +19,22 @@ body {
   background-color: rgba(0,0,0, 0.5);
   z-index: 1;
 }
+.tooltip {
+  position: fixed;
+  left: 25%;
+  right: 25%;
+  top: 25%;
+  bottom: 25%;
+  padding: 10px;
+  margin-top: 2em;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: white;
+  box-shadow: 0 15px 35px rgba(50,50,93,.1),0 5px 15px rgba(0,0,0,.07);
+  border-radius: 5px;
+  z-index: 5;
+}
+
 form {
  position: absolute;
  left: 25%;
@@ -155,5 +171,12 @@ circle:hover {
   border: 3px solid black;
   border-radius: 2px;
   opacity: 70%;
-  r: 10%;
+  r: 5%;
+  fill: gray;
+}
+.circleInfo:hover label {
+  fill: white;
+  opacity: 1;
+  color: black;
+  z-index: 6;
 }

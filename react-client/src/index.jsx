@@ -106,18 +106,19 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // $.ajax({
-    //   url: '/tasks',
-    //   method: "GET",
-    //   success: (data) => {
-    //     this.setState({
-    //       items: data
-    //     })
-    //   },
-    //   error: (err) => {
-    //     console.log('err', err);
-    //   }
-    // });
+    $.ajax({
+      url: '/tasks',
+      method: "GET",
+      success: (data) => {
+        console.log('GET data', data);
+        this.setState({
+          tasks: data
+        })
+      },
+      error: (err) => {
+        console.log('err', err);
+      }
+    });
   }
   togglePopup() {
     this.setState({ showPopup: !this.state.showPopup });
@@ -128,12 +129,9 @@ class App extends React.Component {
     const date = formdata.date;
     const time = formdata.time;
     // year, month, day, hour, minutes
-    // month is 0-based
-    const datefields = [Number(date.slice(6, 10)), Number(date.slice(0, 2)) - 1, Number(date.slice(3, 5)), Number(time.slice(0, 2)), Number(time.slice(3, 5))];
-    console.log('date', datefields);
     const body = {
       description: formdata.description,
-      hours: formdata.hours,
+      hours: Number(formdata.hours),
       deadline: `${date.slice(6, 10)}-${date.slice(0, 2)}-${date.slice(3, 5)} ${time.slice(0, 2)}:${time.slice(3, 5)}:00`,
       category: formdata.category,
       completed: false
@@ -142,9 +140,9 @@ class App extends React.Component {
     $.ajax({
       url: '/tasks',
       method: "POST",
-      data: body,
-      success: () => {
-        console.log('task posted!')
+      data: {body: body},
+      success: (res) => {
+        console.log('task posted!', res)
       },
       error: (err) => {
         console.log('err', err);

@@ -12,22 +12,26 @@ app.use(express.static(__dirname + '/../react-client/dist'));
 // UNCOMMENT FOR ANGULAR
 // app.use(express.static(__dirname + '/../angular-client'));
 // app.use(express.static(__dirname + '/../node_modules'));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.get('/tasks', function (req, res) {
   tasks.selectAll(function(err, data) {
     if(err) {
+      console.log(err);
       res.sendStatus(500);
     } else {
       res.json(data);
     }
   });
 });
-app.get('/tasks', function (req, res) {
 
-})
 app.post('/tasks', function (req, res) {
-  tasks.selectAll(function(err, data) {
+  req.body.body.hours = Number(req.body.body.hours);
+  req.body.body.completed = 0;
+  tasks.postNewTask(req.body.body, function(err, data) {
     if(err) {
+      console.log(err);
       res.sendStatus(500);
     } else {
       res.json(data);

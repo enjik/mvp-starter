@@ -1,4 +1,5 @@
 const faker = require('faker');
+const formatFakerDate = fakerdate => JSON.stringify(fakerdate).slice(1, 11);
 
 const toyproblems = ['bubbleSort', 'commonCharacters', 'deepEquality', 'DFSelect', 'nonrepeatedCharacter',
 'rockPaperScissors', 'powerSet', 'balancedParens', 'composePipe', 'rotatedArraySearch', 'asyncMap', 'functionBind',
@@ -10,47 +11,41 @@ const mealpaldates= ["Mealpal date with Alec H.", "Mealpal date with Anson A.", 
  "Mealpal date with Ricardo F.", "Mealpal date with Richelle J.", "Mealpal date with Ringo S.", "Mealpal date with Servio L.", "Mealpal date with Shayaun N.", "Mealpal date with Sophie L.", "Mealpal date with Steven L.", "Mealpal date with Thu N.", "Mealpal date with Shane Y."];
 
 const guiltypleasures = ['KUWTK', 'Netflix binge', 'take Buzzfeed quizzes', 'draw zentangles', 'Youtube surf', 'redo precourse material', 'Cracking the Code Interview',
-'reduce Instagram followers : following ratio', 'clean up Facebook pictures pre-dating 2013', 'mine crypto', 'become an expert at blockchain', 'browse through TechCrunch'];
+'reduce Instagram followers : following ratio', 'clean up Facebook pictures pre-dating 2013', 'mine crypto', 'learn about blockchain', 'TechCrunch surf'];
 
-const hours = [];
-
-id int NOT NULL AUTO_INCREMENT,
-description varchar(50) NOT NULL,
-hours int NOT NULL,
-deadline datetime NOT NULL,
-category varchar(50) NOT NULL,
-completed boolean NOT NULL,
-position point NOT NULL,
-PRIMARY KEY (id)
-const tasks = [];
-
-const generateTasks = function(num) {
+const generateTasks = function() {
   let tasks = [];
-  for (var i = 0; i < num; i++) {
+  for (var i = 0; i < toyproblems.length; i++) {
     tasks.push(`(
-      ${descriptions[i]},
-      ${hours[i]},
-      FROM_UNIXTIME(
-        UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 63072000))
-      ),
-      ${categories[i]},
-      false,
-      position
-    )`
-  );
+      "${toyproblems[i]}",
+      ${Math.floor(Math.random() * 10) + 1},
+      "${formatFakerDate(faker.date.between('2018-08-28', '2018-10-15'))}",
+      "toy problems",
+      false
+    )`);
+  }
+  for (var i = 0; i < mealpaldates.length; i++) {
+    tasks.push(`(
+      "${mealpaldates[i]}",
+      ${Math.floor(Math.random() * 3) + 1},
+      "${formatFakerDate(faker.date.between('2018-08-28', '2018-10-15'))}",
+      "social",
+      false
+    )`);
+  }
+  for (var i = 0; i < guiltypleasures.length; i++) {
+    tasks.push(`(
+      "${guiltypleasures[i]}",
+      ${Math.floor(Math.random() * 25) + 1},
+      "${formatFakerDate(faker.date.between('2018-08-28', '2018-10-15'))}",
+      "guilty recreational pleasures",
+      false
+    )`);
   }
   return tasks.join(',');
 }
 
-const generateDateTime = function() {
+const categories = ['toy problems', 'social', 'guilty recreational pleasures'];
 
-}
-
-const categories = ['toy problems', 'social', 'guilty pleasures'];
-
-generateTasks(100);
-
-// var radius = 100;
-// x = Math.random() * 2 * radius - radius;
-// ylim = Math.sqrt(radius * radius - x * x);
-// y = Math.random() * 2 * ylim - ylim;
+var arr = generateTasks();
+console.log(arr);
