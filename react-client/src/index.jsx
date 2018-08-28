@@ -100,9 +100,9 @@ class App extends React.Component {
         }
       ],
 
-      showForm: false,
+      showPopup: false,
     }
-    this.handleClick = this.handleClick.bind(this);
+    this.togglePopup = this.togglePopup.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -120,10 +120,14 @@ class App extends React.Component {
     //   }
     // });
   }
-  handleClick() {
-    this.setState({showForm: true});
+  togglePopup() {
+    this.setState({ showPopup: !this.state.showPopup });
   }
-  handleSubmit() {
+  handleSubmit(event) {
+    event.preventDefault();
+    this.togglePopup();
+    console.log('SUBMITTED', event.target.values);
+
     // $.ajax({
     //   url: '/tasks',
     //   method: "POST",
@@ -140,28 +144,15 @@ class App extends React.Component {
   }
 
   render () {
-   const popup = (this.state.showForm ? <Popup value={this.state.value} /> : null);
-   return (
-     <ul>
-       {popup}
-       <li key={0} onClick={() => this.popup('Hello World')}>Click Me!</li>
-     </ul>
-   )
-    let newtaskform;
-    if (this.state.showForm) {
-      newtaskform = <Popup>hello</Popup>;
-    } else {
-      newtaskform = <div></div>;
-    }
     return (
       <div id="full-page">
+        {this.state.showPopup ? <Popup text="New Task" closePopup={this.handleSubmit} /> :null}
         <div id="left-panel">
-          {newtaskform}
           <div id="header-div">
             <h1 id="header">Bubbl.it</h1>
           </div>
           <div>
-            <button onClick={this.handleClick}>New Task</button>
+            <button onClick={this.togglePopup.bind(this)}>New Task</button>
             <svg id="viewport">
                 <TaskManager id="task-manager" tasks={this.state.tasks}/>
             </svg>

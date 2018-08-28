@@ -1,8 +1,8 @@
 import React from 'react';
 
 const CompletionBar = (props) => (
-  <g>
-    <text> Completion Bar </text>
+  <g id="completion-text">
+    <text> Completed </text>
   </g>
 )
 
