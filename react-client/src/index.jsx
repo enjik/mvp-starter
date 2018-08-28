@@ -142,11 +142,14 @@ class App extends React.Component {
     //   }
     // });
   }
+  handleSubmitFormData(formdata) {
+    console.log('FORM DATA', formdata);
+  }
 
   render () {
     return (
       <div id="full-page">
-        {this.state.showPopup ? <Popup text="Task Details" closePopup={this.handleSubmit} /> :null}
+        {this.state.showPopup ? <Popup text="Task Details" closePopup={this.handleSubmit} passFormInput={this.handleSubmitFormData}/> :null}
         <div id="left-panel">
           <div id="header-div">
             <h1 id="header">Bubbl.it</h1>

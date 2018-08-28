@@ -4,18 +4,50 @@ import ReactDOM from 'react-dom';
 class Popup extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      description: null,
+      hours: null,
+      date: null,
+      time: null,
+      category: null
+    };
+    this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
+    this.handleHoursChange = this.handleHoursChange.bind(this);
+    this.handleDateChange = this.handleDateChange.bind(this);
+    this.handleDateChange = this.handleTimeChange.bind(this);
+    this.handleCategoryChange = this.handleCategoryChange.bind(this);
+  }
+  handleDescriptionChange(event) {
+    event.preventDefault();
+    this.setState({event.name: event.value});
+  }
+  handleHoursChange(event) {
+    event.preventDefault();
+    this.setState({event.name: event.value});
+  }
+  handleDateChange(event) {
+
+  }
+  handleDateChange(event) {
+
+  }
+  handleCategoryChange(event) {
+
+  }
+  passToParent() {
+    this.props.passFormInput(this.state);
   }
   render() {
     return(
       <div className='popup'>
           <form onSubmit={this.props.closePopup}>
             <h1 id="form-title">{this.props.text}</h1>
-            <input className="input" type="text" name="description" placeholder="Task Description"/>
-            <input className="input" type="text" name="hours" placeholder= "Hours to Complete"/>
-            <input className="input" type="text" name="deadline-date" placeholder= "Due Date (e.g. '2018/08/28')"/>
-            <input className="input" type="text" name="deadline-time" placeholder= "Time Due (e.g. '13:30')"/>
-            <input className="input" type="text" name="category" placeholder= "Type of Task e.g. 'interview prep'"/>
-            <input className="submit" type="submit" value="Submit" />
+            <input className="input" type="text" onChange={this.handleDescriptionChange} name="description" placeholder="Task Description"/>
+            <input className="input" type="text" onChange={this.handleHoursChange} name="hours" placeholder= "Hours to Complete"/>
+            <input className="input" type="text" onChange={this.handleDateChange} name="deadline-date" placeholder= "Due Date (e.g. '2018/08/28')"/>
+            <input className="input" type="text" onChange={this.handleTimeChange} name="deadline-time" placeholder= "Time Due (e.g. '13:30')"/>
+            <input className="input" type="text" onChange={this.handleCategoryChange} name="category" placeholder= "Type of Task e.g. 'interview prep'"/>
+            <input className="submit" onClick={this.passToParent} type="submit" value="Submit" />
           </form>
       </div>
     )
