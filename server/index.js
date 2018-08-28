@@ -1,8 +1,8 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 // UNCOMMENT THE DATABASE YOU'D LIKE TO USE
-// var items = require('../database-mysql');
-var items = require('../database-mongo');
+var tasks = require('../database-mysql');
+// var tasks = require('../database-mongo');
 
 var app = express();
 
@@ -22,9 +22,11 @@ app.get('/tasks', function (req, res) {
     }
   });
 });
+app.get('/tasks', function (req, res) {
 
+})
 app.post('/tasks', function (req, res) {
-  items.selectAll(function(err, data) {
+  tasks.selectAll(function(err, data) {
     if(err) {
       res.sendStatus(500);
     } else {
@@ -32,6 +34,7 @@ app.post('/tasks', function (req, res) {
     }
   });
 });
+
 
 app.listen(3000, function() {
   console.log('listening on port 3000!');

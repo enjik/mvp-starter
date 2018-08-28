@@ -25,6 +25,8 @@
     "mysql": "^2.13.0",
     "nodemon": "^1.18.3",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "react-popup": "^0.9.3",
+    "react-svg-flexbox": "^0.3.0"
   }
 }

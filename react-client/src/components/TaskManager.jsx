@@ -8,11 +8,11 @@ class TaskManager extends React.Component {
 
   render() {
     return(
-      <g>
+      <g id="task-view">
       {
       this.props.tasks.map((node) => (
           // determine
-            <circle key="node.id" cx="50" cy="50" r="5" transform="translate(20, 34)"/>
+            <circle key={node.id} cx={node.x} cy={node.y} r={Math.floor(node.hours/2)} fill="pink" transform={`translate(${node.x}, ${node.y})`}/>
         ))
       }
       </g>

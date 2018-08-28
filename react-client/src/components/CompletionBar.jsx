@@ -1,9 +1,9 @@
 import React from 'react';
 
 const CompletionBar = (props) => (
-  <div>
-    <h4> Completion Bar </h4>
-  </div>
+  <g>
+    <text> Completion Bar </text>
+  </g>
 )
 
 export default CompletionBar;
