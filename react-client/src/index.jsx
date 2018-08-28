@@ -103,7 +103,6 @@ class App extends React.Component {
       showPopup: false,
     }
     this.togglePopup = this.togglePopup.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -123,33 +122,40 @@ class App extends React.Component {
   togglePopup() {
     this.setState({ showPopup: !this.state.showPopup });
   }
-  handleSubmit(event) {
-    event.preventDefault();
-    this.togglePopup();
-    console.log('SUBMITTED', event.target.values);
-
-    // $.ajax({
-    //   url: '/tasks',
-    //   method: "POST",
-    //   data: {},
-    //   success: (data) => {
-    //     this.setState({
-    //       items: data
-    //     })
-    //   },
-    //   error: (err) => {
-    //     console.log('err', err);
-    //   }
-    // });
-  }
   handleSubmitFormData(formdata) {
     console.log('FORM DATA', formdata);
+    const that = this;
+    const date = formdata.date;
+    const time = formdata.time;
+    // year, month, day, hour, minutes
+    // month is 0-based
+    const datefields = [Number(date.slice(6, 10)), Number(date.slice(0, 2)) - 1, Number(date.slice(3, 5)), Number(time.slice(0, 2)), Number(time.slice(3, 5))];
+    console.log('date', datefields);
+    const body = {
+      description: formdata.description,
+      hours: formdata.hours,
+      deadline: `${date.slice(6, 10)}-${date.slice(0, 2)}-${date.slice(3, 5)} ${time.slice(0, 2)}:${time.slice(3, 5)}:00`,
+      category: formdata.category,
+      completed: false
+    };
+    console.log('BODY', body);
+    $.ajax({
+      url: '/tasks',
+      method: "POST",
+      data: body,
+      success: () => {
+        console.log('task posted!')
+      },
+      error: (err) => {
+        console.log('err', err);
+      }
+    });
   }
 
   render () {
     return (
       <div id="full-page">
-        {this.state.showPopup ? <Popup text="Task Details" closePopup={this.handleSubmit} passFormInput={this.handleSubmitFormData}/> :null}
+        {this.state.showPopup ? <Popup text="Task Details" closePopup={this.togglePopup} passFormInput={this.handleSubmitFormData}/> :null}
         <div id="left-panel">
           <div id="header-div">
             <h1 id="header">Bubbl.it</h1>
